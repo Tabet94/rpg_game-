@@ -1,8 +1,7 @@
 package battle;
 
+import characters.*;
 import characters.Character;
-import characters.Player;
-import characters.Warrior;
 import items.Item;
 import items.Potion;
 import java.util.Scanner;
@@ -44,6 +43,16 @@ public class Battle {
                 if (player instanceof Warrior warrior) {
                     warrior.specialAttack(enemy);
                     System.out.println("⚔️ SPECIAL ATTACK! deals: " + warrior.getSpecialAttackDamage());
+                }
+                // Cast spell — Mage only, Ignore the enemy defense
+                if (player instanceof Mage mage) {
+                    mage.castSpell(enemy);
+                    System.out.println("⚔️ Cast Spell! deals: " + mage.getSpellDamage());
+                }
+                // Double Shot — Archer only, deals two Attack at the same time
+                if (player instanceof Archer archer) {
+                    archer.doubleShot(enemy);
+                    System.out.println("⚔️ Double Shot! deals: " + archer.getDoubleShotDamage());
                 }
 
             } else if (choice == 3) {

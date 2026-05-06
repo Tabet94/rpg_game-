@@ -1,6 +1,6 @@
 package characters;
 
-public class Mage  extends Character{
+public class Mage  extends Player{
 
     //Constructor..............................
     public Mage(String name, int health, int maxHealth, int attack, int defence){
@@ -8,7 +8,10 @@ public class Mage  extends Character{
     }
 
     //Methods ............................................
+    public int getSpellDamage() {
+        return getAttack();
+    }
     public void castSpell(Character enemy){
-        enemy.setHealth(enemy.getHealth() - getAttack());
+        enemy.setHealth(getSpellDamage());
     }
 }
