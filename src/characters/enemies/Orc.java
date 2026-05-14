@@ -2,11 +2,11 @@ package characters.enemies;
 
 import characters.Character;
 
-public class Orc extends Character {
+public class Orc extends Enemy {
 
     //Constructor ...................
-    public Orc (String name, int health, int maxHealth, int attack, int defence){
-        super( name,  health,  maxHealth,  attack,  defence);
+    public Orc (String name){
+        super( name, 180, 180, 35, 20, 100 );
     }
     //method ...................
     public void smash(Character player){

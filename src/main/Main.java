@@ -45,16 +45,16 @@ public class Main {
 
             // Creating Character Objects ...................................................................
 
-        Goblin goblin1 = new Goblin("Sniv", 80, 30, 20, 20);
-        Goblin goblin2 = new Goblin("Gribble", 80, 30, 20, 20);
-        Goblin goblin3 = new Goblin("Tweak", 80, 30, 20, 20);
-        Goblin goblin4 = new Goblin("Ruk", 80, 30, 20, 20);
-        Goblin goblin5 = new Goblin("Zibzib", 80, 30, 20, 20);
-        Orc orc1 = new Orc("Grommash", 80, 200, 30, 40);
-        Orc orc2 = new Orc("Thokar", 80, 200, 30, 40);
-        Orc orc3 = new Orc("Drak", 80, 200, 30, 40);
+        Goblin goblin1 = new Goblin("Sniv");
+        Goblin goblin2 = new Goblin("Gribble");
+        Goblin goblin3 = new Goblin("Tweak");
+        Goblin goblin4 = new Goblin("Ruk");
+        Goblin goblin5 = new Goblin("Zibzib");
+        Orc orc1 = new Orc("Grommash");
+        Orc orc2 = new Orc("Thokar");
+        Orc orc3 = new Orc("Drak");
 
-        Dragon dragon = new Dragon ("Vorthalion the Ash Lord", 500, 200, 50, 30);
+        Dragon dragon = new Dragon ("Vorthalion the Ash Lord");
 
         // Creating Items Objects ...................................................................
         Item weapon = new Weapon("Sword","Power of the heaven Sword", 20);

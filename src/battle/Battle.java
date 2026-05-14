@@ -2,27 +2,30 @@ package battle;
 
 import characters.*;
 import characters.Character;
+import characters.enemies.Enemy;
 import items.Item;
 import items.Potion;
 import java.util.Scanner;
 
 public class Battle {
     private Player player;
-    private Character enemy;
+    private Enemy enemy;
     private Scanner scanner = new Scanner(System.in);
 
-    public Battle(Player player, Character enemy) {
+    public Battle(Player player, Enemy enemy) {
         this.player = player;
         this.enemy = enemy;
     }
 
     public void starBattle() {
+        System.out.println("\n⚔️ BATTLE START: " + player.getName() + " vs " + enemy.getName());
+        System.out.println("Your HP: " + player.getHealth() + " | Enemy HP: " + enemy.getHealth());
+        System.out.println("─────────────────────────────────");
 
-        // Keep fighting until someone dies
         while (player.isAlive() && enemy.isAlive()) {
 
-            // Show player options each turn
-            System.out.println("\nYour turn!");
+            System.out.println("\n📊 STATUS → " + player.getName() + " HP: " + player.getHealth() + " | " + enemy.getName() + " HP: " + enemy.getHealth());
+            System.out.println("Your turn!");
             System.out.println("1. Attack");
             System.out.println("2. Special Attack");
             System.out.println("3. Use Potion");
@@ -30,63 +33,59 @@ public class Battle {
             int damage = 0;
 
             if (choice == 1) {
-                // Normal attack — base attack + weapon bonus if equipped
                 damage = player.getAttack();
                 if (player.getWeapon() != null) {
                     damage += player.getWeapon().getDamageBonus();
                 }
                 enemy.takeDamage(damage);
-                System.out.println("Player Attack power: " + damage + " | Player: " + player.getName());
+                System.out.println("🗡️ " + player.getName() + " attacks " + enemy.getName() + " for " + damage + " damage!");
 
             } else if (choice == 2) {
-                // Special attack — Warrior only, deals double damage
                 if (player instanceof Warrior warrior) {
                     warrior.specialAttack(enemy);
-                    System.out.println("⚔️ SPECIAL ATTACK! deals: " + warrior.getSpecialAttackDamage());
+                    System.out.println("⚔️ POWER SLASH! " + player.getName() + " deals " + warrior.getSpecialAttackDamage() + " damage!");
                 }
-                // Cast spell — Mage only, Ignore the enemy defense
                 if (player instanceof Mage mage) {
                     mage.castSpell(enemy);
-                    System.out.println("⚔️ Cast Spell! deals: " + mage.getSpellDamage());
+                    System.out.println("🔥 FIREBALL! " + player.getName() + " ignores defence and deals " + mage.getSpellDamage() + " damage!");
                 }
-                // Double Shot — Archer only, deals two Attack at the same time
                 if (player instanceof Archer archer) {
                     archer.doubleShot(enemy);
-                    System.out.println("⚔️ Double Shot! deals: " + archer.getDoubleShotDamage());
+                    System.out.println("🏹 DOUBLE SHOT! " + player.getName() + " fires twice for " + archer.getDoubleShotDamage() + " total damage!");
                 }
 
             } else if (choice == 3) {
-                // Find first potion in inventory, use it, then remove it
                 boolean foundPotion = false;
                 for (Item item : player.getInventory().getStoreItems()) {
                     if (item instanceof Potion potion) {
+                        int before = player.getHealth();
                         player.heal(potion.getHealAmount());
                         player.getInventory().removeItem(item);
-                        System.out.println("You used: " + potion.getName());
-                        System.out.println("Health: " + player.getHealth() + " | Player: " + player.getName());
+                        System.out.println("🧪 Used: " + potion.getName() + " | HP: " + before + " → " + player.getHealth());
                         foundPotion = true;
                         break;
                     }
                 }
                 if (!foundPotion) {
-                    System.out.println("No potions in inventory!");
+                    System.out.println("❌ No potions in inventory!");
                 }
             }
 
-            // Check if enemy died from player's attack
-            System.out.println("Enemy HP: " + enemy.getHealth() + " | Enemy: " + enemy.getName());
+            System.out.println("💀 " + enemy.getName() + " HP: " + enemy.getHealth());
             if (!enemy.isAlive()) {
-                System.out.println("Enemy defeated!");
+                System.out.println("✅ " + enemy.getName() + " defeated! +" + enemy.getExpReward() + " XP");
+                player.gainExperience(enemy.getExpReward());
                 break;
             }
 
-            // Enemy attacks back
             player.takeDamage(enemy.getAttack());
-            System.out.println("Player HP: " + player.getHealth() + " | Player: " + player.getName());
+            System.out.println("💢 " + enemy.getName() + " attacks " + player.getName() + " for " + enemy.getAttack() + " damage!");
+            System.out.println("❤️ " + player.getName() + " HP: " + player.getHealth());
             if (!player.isAlive()) {
-                System.out.println("You are defeated!");
+                System.out.println("💀 " + player.getName() + " has been defeated!");
                 break;
             }
         }
+        System.out.println("─────────────────────────────────");
     }
 }

@@ -2,18 +2,18 @@ package characters.enemies;
 
 import characters.Character;
 
-public class Dragon extends Character {
+public class Dragon extends Enemy {
 
     //Constructor ...................
-    public Dragon (String name, int health, int maxHealth, int attack, int defence){
-        super( name,  health,  maxHealth,  attack,  defence);
+    public Dragon (String name){
+        super( name, 400, 400, 45, 25, 300);
     }
     //method ...................
-    public void fireBreath(Character player){
-
-        player.takeDamage(getAttack());
-        player.setMaxHealth(player.getMaxHealth() -20 );
-
+    public int getFireBreathDamage(){
+       return (70);
     }
-
+    public void fireBreath(Character player){
+        player.takeDamage(70);
+        player.setMaxHealth(player.getMaxHealth() -70 );
+    }
 }

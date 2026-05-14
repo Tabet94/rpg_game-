@@ -3,6 +3,7 @@ package map;
 import battle.Battle;
 import characters.Character;
 import characters.Player;
+import characters.enemies.Enemy;
 import items.Item;
 import items.Potion;
 import items.Weapon;
@@ -15,7 +16,7 @@ public class Room {
     private final String name;
     private final String description;
     private boolean isCleared;
-    private final ArrayList<Character> enemies;
+    private final ArrayList<Enemy> enemies;
     private final ArrayList<Item> loot;
     private Scanner scanner = new Scanner(System.in);
 
@@ -27,7 +28,7 @@ public class Room {
         loot = new ArrayList<>();
     }
 
-    public void addEnemy(Character enemy) {
+    public void addEnemy(Enemy enemy) {
         enemies.add(enemy);
     }
 
@@ -38,7 +39,7 @@ public class Room {
     public void enter(Player player) {
 
         // Fight each enemy one by one
-        for (Character enemy : enemies) {
+        for (Enemy enemy : enemies) {
             Battle battle = new Battle(player, enemy);
             battle.starBattle();
             // Stop if player dies mid-room
@@ -80,7 +81,7 @@ public class Room {
     public String getName() { return name; }
     public String getDescription() { return description; }
     public boolean isCleared() { return isCleared; }
-    public ArrayList<Character> getEnemies() { return enemies; }
+    public ArrayList<Enemy> getEnemies() { return enemies; }
     public ArrayList<Item> getLoot() { return loot; }
     public void setCleared(boolean cleared) { isCleared = cleared; }
 }

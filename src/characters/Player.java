@@ -58,10 +58,12 @@ public class Player  extends  Character{
 
     public void gainExperience(int amount){
        experience+= amount;
-       if (experience>=100){
-           level ++;
-           experience =0;
-           System.out.println("Level up");
-       }
+        int[] thresholds = {0, 100, 250, 450, 700, 1000};
+
+        if (level < thresholds.length && experience >= thresholds[level]) {
+            level++;
+            experience -= thresholds[level - 1];
+            System.out.println("Level up! You are now level " + level);
+        }
     }
 }
