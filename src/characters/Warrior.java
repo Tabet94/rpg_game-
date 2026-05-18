@@ -2,18 +2,26 @@ package characters;
 
 public class Warrior extends Player {
 
-    // Constructor with super .................................
-    public  Warrior (String name, int health, int maxHealth, int attack, int defence){
-        super( name,  health,  maxHealth,  attack,  defence);
+    private final int damageReduction;
+
+    // Constructor .................................
+    public Warrior(String name) {
+
+        super(name, 150, 150, 20, 15);
+
+        damageReduction = 5;
     }
-    // Methods  .........................................................................
-    // Warrior Attack *2 from the default Attack  .........................................................
+
+    // Getter ......................................
+    public int getDamageReduction() {
+        return damageReduction;
+    }
+
+    // Warrior Special Attack ......................
     public int getSpecialAttackDamage() {
         return getAttack() * 2;
     }
 
-
-  // ...........................................................
     public void specialAttack(Character enemy) {
         enemy.takeDamage(getSpecialAttackDamage());
     }

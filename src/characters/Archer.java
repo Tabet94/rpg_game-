@@ -3,8 +3,8 @@ package characters;
 public class Archer  extends Player{
 
     //Constructor..............................
-    public Archer(String name, int health, int maxHealth, int attack, int defence){
-        super( name,  health,  maxHealth,  attack,  defence);
+    public Archer(String name){
+        super( name,  110,  110,  25,  10);
     }
 
     //Methods ............................................

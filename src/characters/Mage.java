@@ -3,8 +3,8 @@ package characters;
 public class Mage  extends Player{
 
     //Constructor..............................
-    public Mage(String name, int health, int maxHealth, int attack, int defence){
-        super( name,  health,  maxHealth,  attack,  defence);
+    public Mage(String name){
+        super( name,  90,  90,  30,  5);
     }
 
     //Methods ............................................

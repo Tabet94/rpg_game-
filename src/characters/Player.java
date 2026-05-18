@@ -13,8 +13,8 @@ public class Player  extends  Character{
 
     //Constructor.............................................
 
-    public Player( String name, int health, int maxHealth, int attack, int defence){
-        super(name, health, maxHealth, attack, defence);
+    public Player( String name, int health, int maxHealth, int attack, int defense){
+        super(name, health, maxHealth, attack, defense);
         inventory = new Inventory(10);
         weapon = null;
         this.level = 1;

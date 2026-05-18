@@ -26,9 +26,12 @@ public class Battle {
 
             System.out.println("\n📊 STATUS → " + player.getName() + " HP: " + player.getHealth() + " | " + enemy.getName() + " HP: " + enemy.getHealth());
             System.out.println("Your turn!");
-            System.out.println("1. Attack");
-            System.out.println("2. Special Attack");
-            System.out.println("3. Use Potion");
+            System.out.println();
+            System.out.println("Choose your action:");
+            System.out.println("1. 🗡️ Attack");
+            System.out.println("2. ✨ Special Attack");
+            System.out.println("3. 🧪 Use Potion");
+            System.out.print("Action: ");
             int choice = scanner.nextInt();
             int damage = 0;
 
@@ -37,8 +40,8 @@ public class Battle {
                 if (player.getWeapon() != null) {
                     damage += player.getWeapon().getDamageBonus();
                 }
-                enemy.takeDamage(damage);
-                System.out.println("🗡️ " + player.getName() + " attacks " + enemy.getName() + " for " + damage + " damage!");
+                int actualDamage = enemy.takeDamage(damage);
+                System.out.println("🗡️ " + player.getName() + " attacks " + enemy.getName() + " for " + actualDamage + " damage!");
 
             } else if (choice == 2) {
                 if (player instanceof Warrior warrior) {

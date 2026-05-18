@@ -10,8 +10,8 @@ public class Necromancer extends Enemy {
     }
     //Method Ability : Dark Curse Ignores 25% defense ........................
     public int getDarkCurseDamage(Character player) {
-        int effectiveDefence = player.getDefence() * 75 / 100;
-        return getAttack() - effectiveDefence;
+        int effectiveDefense = player.getDefense() * 75 / 100;
+        return getAttack() - effectiveDefense;
     }
 
     public void darkCurse(Character player){
