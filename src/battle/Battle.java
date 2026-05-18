@@ -36,43 +36,69 @@ public class Battle {
             int damage = 0;
 
             if (choice == 1) {
-                damage = player.getAttack();
+
+                 damage = player.getAttack();
+
                 if (player.getWeapon() != null) {
                     damage += player.getWeapon().getDamageBonus();
                 }
+
+                if (player instanceof Archer archer) {
+                    damage = archer.applyCrit(damage);
+                }
+
                 int actualDamage = enemy.takeDamage(damage);
-                System.out.println("🗡️ " + player.getName() + " attacks " + enemy.getName() + " for " + actualDamage + " damage!");
+
+                System.out.println("🗡️ " + player.getName()
+                        + " attacks " + enemy.getName()
+                        + " for " + actualDamage + " damage!");
 
             } else if (choice == 2) {
+
                 if (player instanceof Warrior warrior) {
                     warrior.specialAttack(enemy);
-                    System.out.println("⚔️ POWER SLASH! " + player.getName() + " deals " + warrior.getSpecialAttackDamage() + " damage!");
+                    System.out.println("⚔️ POWER SLASH! " + player.getName()
+                            + " deals " + warrior.getSpecialAttackDamage() + " damage!");
                 }
+
                 if (player instanceof Mage mage) {
                     mage.castSpell(enemy);
-                    System.out.println("🔥 FIREBALL! " + player.getName() + " ignores defence and deals " + mage.getSpellDamage() + " damage!");
+                    System.out.println("🔥 FIREBALL! " + player.getName()
+                            + " ignores defence and deals " + mage.getSpellDamage() + " damage!");
                 }
+
                 if (player instanceof Archer archer) {
                     archer.doubleShot(enemy);
-                    System.out.println("🏹 DOUBLE SHOT! " + player.getName() + " fires twice for " + archer.getDoubleShotDamage() + " total damage!");
+                    System.out.println("🏹 DOUBLE SHOT! " + player.getName()
+                            + " fires twice for " + archer.getDoubleShotDamage() + " total damage!");
                 }
 
             } else if (choice == 3) {
+
                 boolean foundPotion = false;
+
                 for (Item item : player.getInventory().getStoreItems()) {
+
                     if (item instanceof Potion potion) {
                         int before = player.getHealth();
+
                         player.heal(potion.getHealAmount());
                         player.getInventory().removeItem(item);
-                        System.out.println("🧪 Used: " + potion.getName() + " | HP: " + before + " → " + player.getHealth());
+
+                        System.out.println("🧪 Used: " + potion.getName()
+                                + " | HP: " + before + " → " + player.getHealth());
+
                         foundPotion = true;
                         break;
                     }
                 }
+
                 if (!foundPotion) {
                     System.out.println("❌ No potions in inventory!");
                 }
             }
+
+
 
             System.out.println("💀 " + enemy.getName() + " HP: " + enemy.getHealth());
             if (!enemy.isAlive()) {
