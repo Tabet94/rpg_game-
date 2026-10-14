@@ -40,15 +40,17 @@ public class Room {
 
     public void enter(Player player) {
 
-        System.out.println();
-        System.out.println("════════════════════════════════════");
-        System.out.println("Entering Room: " + name);
-        System.out.println("════════════════════════════════════");
-        System.out.println(description);
-        System.out.println();
-        System.out.println("Enemies detected: " + enemies.size());
-        System.out.println("════════════════════════════════════");
+
         if (player.getLevel()>= requiredLevel){
+            System.out.println();
+            System.out.println("════════════════════════════════════");
+            System.out.println("Entering Room: " + name);
+            System.out.println("════════════════════════════════════");
+            System.out.println(description);
+            System.out.println();
+            System.out.println("Enemies detected: " + enemies.size());
+            System.out.println("════════════════════════════════════");
+
             // Fight each enemy one by one
             for (Enemy enemy : enemies) {
                 Battle battle = new Battle(player, enemy);
@@ -95,6 +97,7 @@ public class Room {
             }
 
             System.out.println("Your Health is: " + player.getHealth());
+            // This else is for the first if statement to check if the player has the required level to enter to a room
         }else {
             System.out.println("You can't access to that room");
         }

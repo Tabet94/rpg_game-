@@ -1,30 +1,32 @@
 package inventory;
 
+import characters.Player;
 import items.Item;
+import items.Weapon;
 
 import java.util.ArrayList;
 
 public class Inventory {
 
-    private ArrayList<Item> storeItems;
+    private final ArrayList<Item> storeItems = new ArrayList<>();
     private final int maxCapacity;
+    private final Player owner;
 
 
     //Constructor ........................................................
-    public Inventory(int maxCapacity) {
+    public Inventory(int maxCapacity, Player owner) {
         this.maxCapacity = maxCapacity;
-        storeItems = new ArrayList<>();
+        this.owner = owner;
+
     }
 
     //Methods ............................................................
 
     public boolean addItem(Item item) {
-       if(storeItems.size()>= maxCapacity){
-           return false;
-       }else {
-           storeItems.add(item);
-           return true;
-       }
+        if (storeItems.size() >= maxCapacity) return false;
+        if (item instanceof Weapon w && w.canBeUsedBy(owner)) return false;
+        storeItems.add(item);
+        return true;
     }
 
     public boolean removeItem(Item item){

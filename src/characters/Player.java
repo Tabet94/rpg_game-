@@ -1,5 +1,6 @@
 package characters;
 
+import combat.Skill;
 import inventory.Inventory;
 import items.Weapon;
 
@@ -10,17 +11,21 @@ public class Player  extends  Character{
     private Weapon weapon;
     private int level;
     private int experience;
+    private Skill skill;
 
     //Constructor.............................................
 
     public Player( String name, int health, int maxHealth, int attack, int defense){
         super(name, health, maxHealth, attack, defense);
-        inventory = new Inventory(10);
+        inventory = new Inventory(10, this);
         weapon = null;
         this.level = 1;
         this.experience = 0;
+
     }
 
+
+    //Getter .............................................
     public Inventory getInventory() {
         return inventory;
     }
@@ -37,6 +42,9 @@ public class Player  extends  Character{
         return experience;
     }
 
+
+    //Setter .............................................
+
     public void setLevel(int level) {
         this.level = level;
     }
@@ -51,10 +59,16 @@ public class Player  extends  Character{
 
 
     //Methods .................................................................
-    public void equipWeapon(Weapon weapon){
-       setWeapon(weapon);
-       System.out.println("you equipped:" + weapon.getName());
+    public void equipWeapon(Weapon weapon) {
+        if (weapon.canBeUsedBy(this)) {
+            System.out.println("A " + getClass().getSimpleName()
+                    + " cannot wield " + weapon.getName() + ".");
+            return;
+        }
+        setWeapon(weapon);
+        System.out.println("You equipped: " + weapon.getName());
     }
+
 
     public void gainExperience(int amount){
        experience+= amount;
@@ -65,5 +79,13 @@ public class Player  extends  Character{
             experience -= thresholds[level - 1];
             System.out.println("Level up! You are now level " + level);
         }
+    }
+
+    public Skill getSkill() {
+        return skill;
+    }
+
+    public void setSkill(Skill skill) {
+        this.skill = skill;
     }
 }

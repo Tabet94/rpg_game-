@@ -71,6 +71,8 @@ public int takeDamage(int damage){
                         (100 - warrior.getDamageReduction()) / 100;
     }
 
+
+
     if(actualDamage < 1){
         actualDamage = 1;
     }

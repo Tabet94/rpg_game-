@@ -1,15 +1,10 @@
 package items;
 
-public class Wand extends Item {
-    private final int damageBonus;
+import characters.Mage;
 
-    //Constructor ...........................................................................
-    public Wand (String name, String description , int damageBonus){
-        super(name, description);
-        this.damageBonus = damageBonus;
-    }
-    //Getter ................................................................................
-    public int getDamageBonus() {
-        return damageBonus;
+public class Wand extends Weapon {
+
+    public Wand(String name, String description, int damageBonus) {
+        super(name, description, damageBonus, Mage.class);
     }
 }

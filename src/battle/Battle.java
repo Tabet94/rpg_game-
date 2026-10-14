@@ -3,6 +3,7 @@ package battle;
 import characters.*;
 import characters.Character;
 import characters.enemies.Enemy;
+import combat.CombatEngine;
 import items.Item;
 import items.Potion;
 import java.util.Scanner;
@@ -11,6 +12,8 @@ public class Battle {
     private Player player;
     private Enemy enemy;
     private Scanner scanner = new Scanner(System.in);
+    private CombatEngine combatEngine = new CombatEngine();
+
 
     public Battle(Player player, Enemy enemy) {
         this.player = player;
@@ -33,47 +36,24 @@ public class Battle {
             System.out.println("3. 🧪 Use Potion");
             System.out.print("Action: ");
             int choice = scanner.nextInt();
-            int damage = 0;
+
 
             if (choice == 1) {
 
-                 damage = player.getAttack();
-
-                if (player.getWeapon() != null) {
-                    damage += player.getWeapon().getDamageBonus();
-                }
-
-                if (player instanceof Archer archer) {
-                    damage = archer.applyCrit(damage);
-                }
-
-                int actualDamage = enemy.takeDamage(damage);
+                int actualDamage =
+                        combatEngine.basicAttack(player, enemy);
 
                 System.out.println("🗡️ " + player.getName()
                         + " attacks " + enemy.getName()
                         + " for " + actualDamage + " damage!");
 
             } else if (choice == 2) {
+                int actualDamage = combatEngine.useSkill(player, enemy);
+                System.out.println("✨ " + player.getName()
+                        + " uses skill on " + enemy.getName()
+                        + " for " + actualDamage + " damage!");
 
-                if (player instanceof Warrior warrior) {
-                    warrior.specialAttack(enemy);
-                    System.out.println("⚔️ POWER SLASH! " + player.getName()
-                            + " deals " + warrior.getSpecialAttackDamage() + " damage!");
-                }
-
-                if (player instanceof Mage mage) {
-                    mage.castSpell(enemy);
-                    System.out.println("🔥 FIREBALL! " + player.getName()
-                            + " ignores defence and deals " + mage.getSpellDamage() + " damage!");
-                }
-
-                if (player instanceof Archer archer) {
-                    archer.doubleShot(enemy);
-                    System.out.println("🏹 DOUBLE SHOT! " + player.getName()
-                            + " fires twice for " + archer.getDoubleShotDamage() + " total damage!");
-                }
-
-            } else if (choice == 3) {
+                } else if (choice == 3) {
 
                 boolean foundPotion = false;
 

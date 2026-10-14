@@ -1,15 +1,12 @@
 package items;
 
-public class Bow extends Item {
-    private final int damageBonus;
+import characters.Archer;
 
-    //Constructor ...........................................................................
-    public Bow (String name, String description , int damageBonus){
-        super(name, description);
-        this.damageBonus = damageBonus;
+
+    public class Bow extends Weapon {
+        public Bow(String name, String description, int damageBonus) {
+            super(name, description, damageBonus, Archer.class);
+        }
     }
-    //Getter ................................................................................
-    public int getDamageBonus() {
-        return damageBonus;
-    }
-}
+
+

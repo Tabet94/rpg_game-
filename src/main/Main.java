@@ -19,7 +19,7 @@ public class Main {
     public static void main(String[] args) {
 
 
-
+        // Need to fix the item for each class mage can't add sword to his inventory and so on ...................................................................
         Scanner scanner = new Scanner(System.in);
             System.out.println("Enter your name:");
             String name = scanner.next();
@@ -87,19 +87,19 @@ public class Main {
         Dragon dragon = new Dragon ("Vorthalion the Ash Lord");
 
         // Creating Items Objects ...................................................................
-        Item sword = new Weapon("Sword", "A basic sword", 10);
-        Item steelSword = new Weapon("Steel Sword", "A stronger sword", 20);
-        Item battleAxe = new Weapon("Battle Axe", "A devastating axe", 35);
+        Item sword = new Weapon("Sword", "A basic sword", 10, Warrior.class);
+        Item steelSword = new Weapon("Steel Sword", "A stronger sword", 20, Warrior.class);
+        Item battleAxe = new Weapon("Battle Axe", "A devastating axe", 35, Warrior.class);
         Item smallPotion = new Potion("Minor Healing Potion", "A small red potion that restores a little health", 30);
-        Item mediumPotion = new Weapon("Knight's Remedy", "A refined healing potion used by dungeon knights to recover during battle", 60);
-        Item largePotion = new Weapon("Elixir of Vitality", "A rare magical potion filled with powerful restorative energy", 100);
+        Item mediumPotion = new Potion("Knight's Remedy", "A refined healing potion used by dungeon knights to recover during battle", 60);
+        Item largePotion = new Potion("Elixir of Vitality", "A rare magical potion filled with powerful restorative energy", 100);
 
 
 
         // Creating Room1 ..............................................................................
         Room room1 = new Room("Whispering Den","A damp, shadowy cave where faint whispers echo off the walls. Small shapes move in the dark—goblins lurking, waiting for the perfect moment to strike");
         room1.addEnemy(skeleton1);
-        room1.addEnemy(skeleton2);
+
         room1.addEnemy(goblin1);
         room1.addLoot(smallPotion);
         room1.addLoot(sword);

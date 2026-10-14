@@ -1,6 +1,9 @@
 package characters;
 
+import combat.ArcherSkill;
+
 import java.util.Random;
+
 
 public class Archer extends Player {
 
@@ -9,8 +12,9 @@ public class Archer extends Player {
 
     private final Random random = new Random();
 
-    public Archer(String name) {
+    public Archer(String name){
         super(name, 110, 110, 25, 10);
+
     }
 
     // Returns final damage after crit check
@@ -24,12 +28,5 @@ public class Archer extends Player {
         return damage;
     }
 
-    public int getDoubleShotDamage() {
-        return getAttack() * 2;
-    }
 
-    public void doubleShot(Character enemy) {
-        enemy.takeDamage(getAttack());
-        enemy.takeDamage(getAttack());
-    }
 }
